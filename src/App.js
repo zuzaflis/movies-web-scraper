@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import MoviesList from './components/MoviesList'
+import "./app.css";
+
+const URL = "http://127.0.0.1:5000"
 
 function App() {
+  const [newSearchMovie, setNewSearchMovie] = useState("");
+  const [movie_info, setMovieInfo] = useState("")
+
+    const handleNewSearchChange = (event) => {
+        setNewSearchMovie(event.target.value);
+    }
+
+
+   const handleNewSearchSubmit = async (event) =>{
+       event.preventDefault();
+       try{
+           const response = await axios.get(
+           `${URL}/search?movie_name=${newSearchMovie}`
+           );
+
+         const data = response.data;
+         setMovieInfo(data);
+        } catch(error) {
+        console.error("Error fetching")
+        }
+   }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <h1>Movie Search</h1>
+        <form className = "submit-form" onSubmit={handleNewSearchSubmit}>
+        <input
+            type="text"
+            value ={newSearchMovie}
+            onChange = {handleNewSearchChange}
+            placeholder="Enter movie name"
+         />
+
+        <button type="submit">Search</button>
+
+        </form>
+
+     <MoviesList 
+     movie_info = {movie_info}
+     onSearchClick = {handleNewSearchChange}
+     />
     </div>
   );
 }
+
 
 export default App;
