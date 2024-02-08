@@ -1,24 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./MovieList.css";
+import ModalComponent from './Modal';
+import MovieDetailsPage from './MovieDetailsPage';
 
 function MoviesList({movie_info, onSearchClick }){
-    if (!Array.isArray(movie_info)) {
-        return <div>No movies found</div>;
-      }
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentMovie, setCurrentMovie] = useState({});
+
+    const openModal = (movie) => {
+      setCurrentMovie(movie);
+      setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+      setIsModalOpen(false);
+    }
+
+
+
+
     return(
-        <div className="movie-container">
-        {movie_info.map((movie, index) => (
-          <div key={index} className="movie-card">
-            <img src={movie.poster} alt={movie.title} />
-            <div>
-              <h3>{movie.title}</h3>
-              <p>Year: {movie.year}</p>
-              <p>Duration: {movie.duration}</p>
-              <p>Quality: {movie.quality}</p>
-              <a href={movie.link}>Watch Now</a>
+      <div className="movie-container">
+      {Object.keys(movie_info).map((title) => (
+        <div className="movie-card" key={title} onClick={() => openModal(movie_info[title])}>
+          <h3>{title}</h3>
+          {movie_info[title].filter((movie) => movie.source === 'ev' || movie.source === 'europix' || movie.source === 'rt').map((movie) => (
+            <div key={movie.source} >
+              <img src={movie.info.poster} alt={movie.info.title} />
+              <p> {movie.info.year}</p>
+              <p> {movie.info.quality}</p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      ))}
+        
+
+       <ModalComponent
+       isOpen={isModalOpen}
+       closeModal={closeModal}
+       content={<MovieDetailsPage movie={currentMovie}/>}
+       />
+
       </div>
     );
 }

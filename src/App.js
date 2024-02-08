@@ -23,6 +23,7 @@ function App() {
 
          const data = response.data;
          setMovieInfo(data);
+         console.log(movie_info)
         } catch(error) {
         console.error("Error fetching")
         }
