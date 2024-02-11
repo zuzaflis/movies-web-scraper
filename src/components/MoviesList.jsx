@@ -3,6 +3,7 @@ import "./MovieList.css";
 import ModalComponent from './Modal';
 import MovieDetailsPage from './MovieDetailsPage';
 
+
 function MoviesList({movie_info, onSearchClick }){
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentMovie, setCurrentMovie] = useState({});
@@ -27,15 +28,13 @@ function MoviesList({movie_info, onSearchClick }){
             <h3>{title}</h3>
             <div key={movie.source}>
               <img src={movie.info.poster} alt={movie.info.title} />
-              <p>{movie.info.year}</p>
+              <h4>{movie.info.year}</h4>
               <p>{movie.info.quality}</p>
-              <h3>{movie.source}</h3>
             </div>
           </div>
         ))
       ))}
 
-        
 
        <ModalComponent
        isOpen={isModalOpen}
