@@ -22,17 +22,19 @@ function MoviesList({movie_info, onSearchClick }){
     return(
       <div className="movie-container">
       {Object.keys(movie_info).map((title) => (
-        <div className="movie-card" key={title} onClick={() => openModal(movie_info[title])}>
-          <h3>{title}</h3>
-          {movie_info[title].filter((movie) => movie.source === 'ev' || movie.source === 'europix' || movie.source === 'rt').map((movie) => (
-            <div key={movie.source} >
+        movie_info[title].filter((movie) => movie.source === "europix").map((movie) => (
+          <div className="movie-card" key={title} onClick={() => openModal(movie_info[title])}>
+            <h3>{title}</h3>
+            <div key={movie.source}>
               <img src={movie.info.poster} alt={movie.info.title} />
-              <p> {movie.info.year}</p>
-              <p> {movie.info.quality}</p>
+              <p>{movie.info.year}</p>
+              <p>{movie.info.quality}</p>
+              <h3>{movie.source}</h3>
             </div>
-          ))}
-        </div>
+          </div>
+        ))
       ))}
+
         
 
        <ModalComponent
