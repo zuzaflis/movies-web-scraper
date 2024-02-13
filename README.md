@@ -33,7 +33,7 @@ npm run start
 ```
 
 ## Visuals
-![](https://github.com/zuzaflis/movies-web-scraper/blob/master/g).gif)
+![](https://github.com/zuzaflis/movies-web-scraper/blob/master/g.gif)
 
 ## Project status
 The project is currently active and will be continued in the future. I plan to expand the functionality by adding scrapers for additional websites and integrating databases, such as HBO, to provide more comprehensive information.
