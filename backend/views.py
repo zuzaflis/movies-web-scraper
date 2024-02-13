@@ -1,14 +1,15 @@
 from flask import Blueprint, request, send_from_directory
 from flask_cors import CORS, cross_origin
-from backend import movies_merger, app
+
+from backend import movies_merger
 
 views = Blueprint(__name__, "views")
 
 
-@views.route('/')
-@cross_origin()
-def serve():
-    return send_from_directory(app.static_folder, 'index.html')
+# @views.route('/')
+# @cross_origin()
+# def serve():
+#     return send_from_directory(app.static_folder, 'index.html')
 
 
 @cross_origin()
