@@ -5,6 +5,7 @@ const customModalStyles = {
     content: {
       width: '50%', 
       margin: 'auto',
+      backgroundColor: '#f5f2f5'
     },
   };
 

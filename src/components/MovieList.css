@@ -8,12 +8,20 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
-    width: 200px;
+    width: 240px;
+    height: 500px;
+  }
+
+  .poster-container {
+    height: 400px; 
+    display: grid;
+    justify-content: center;
+    align-items: center;
   }
   
   .movie-card img {
-    width: 100%;
-    height: auto;
+   height: 100%;
+   width: 100%;
   }
   
   .movie-card div {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./MovieList.css";
 import ModalComponent from './Modal';
 import MovieDetailsPage from './MovieDetailsPage';
+import { Grid, CardContent} from "@mui/material";
 
 
 function MoviesList({movie_info, onSearchClick }){
@@ -19,30 +20,29 @@ function MoviesList({movie_info, onSearchClick }){
 
 
 
-
-    return(
-      <div className="movie-container">
-      {Object.keys(movie_info).map((title) => (
-        movie_info[title].filter((movie) => movie.source === "europix").map((movie) => (
-          <div className="movie-card" key={title} onClick={() => openModal(movie_info[title])}>
-            <h3>{title}</h3>
-            <div key={movie.source}>
-              <img src={movie.info.poster} alt={movie.info.title} />
-              <h4>{movie.info.year}</h4>
-              <p>{movie.info.quality}</p>
-            </div>
-          </div>
-        ))
-      ))}
-
-
-       <ModalComponent
-       isOpen={isModalOpen}
-       closeModal={closeModal}
-       content={<MovieDetailsPage movie={currentMovie}/>}
-       />
-
-      </div>
+    return (
+      <Grid container spacing={1}>
+        {Object.keys(movie_info).map((title) => (
+          movie_info[title].filter((movie) => movie.source === "europix").map((movie) => (
+            <Grid item xs={12} sm={6} md={3} lg={2} key={title}>
+                <CardContent>
+                  <div className="movie-card" onClick={() => openModal(movie_info[title])}>
+                  <h3 style={{ textAlign: 'center' , marginTop: '10px', marginBottom: '10px'}}>{title}</h3>
+                    <div className="poster-container" key={movie.source}>
+                      <img src={movie.info.poster} alt={movie.info.title} />
+                      <p><b>{movie.info.year}</b>,  {movie.info.quality}</p>
+                    </div>
+                  </div>
+                </CardContent>
+            </Grid>
+          ))
+        ))}
+        <ModalComponent
+          isOpen={isModalOpen}
+          closeModal={closeModal}
+          content={<MovieDetailsPage movie={currentMovie}/>}
+        />
+      </Grid>
     );
 }
 
